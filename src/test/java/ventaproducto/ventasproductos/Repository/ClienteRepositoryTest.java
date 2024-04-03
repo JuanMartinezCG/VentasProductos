@@ -37,13 +37,6 @@ class ClienteRepositoryTest extends AbstractIntegrationDBTest{
         .direccion("la de tu mama")
         .pedidos(null)
         .build();
-        /* 
-        customer = new Cliente();
-        customer.setId(1L);
-        customer.setNombre("juan");
-        customer.setEmail("tumama@gmail.com");
-        customer.setDireccion("la de tu mama");
-        customer.setPedidos(null);*/
 
         Cliente clienteGuardado = clienteRepository.save(customer);
 

@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 import ventaproducto.ventasproductos.servicies.Cliente.ClienteServiceInterface;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customers")
 public class ClienteController {
 
-    private final ClienteServiceInterface clienteService;
+    private ClienteServiceInterface clienteService;
 
     
     public ClienteController(ClienteServiceInterface clienteService) {
@@ -21,9 +20,9 @@ public class ClienteController {
 
     // Crear un nuevo cliente
     @PostMapping
-    public ResponseEntity<Void> createCliente(@RequestBody ClienteDtoSave clienteJSON) {
+    public ResponseEntity<Integer> createCliente(@RequestBody ClienteDtoSave clienteJSON) {
         clienteService.guardarCliente(clienteJSON);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok(200);
     }
     /* 
     // Obtener cliente por ID

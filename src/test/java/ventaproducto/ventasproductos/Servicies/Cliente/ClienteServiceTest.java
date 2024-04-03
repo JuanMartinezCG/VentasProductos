@@ -4,10 +4,10 @@ import static org.mockito.ArgumentMatchers.any;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.MockitoJUnitRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -15,22 +15,24 @@ import ventaproducto.ventasproductos.dto.Cliente.ClienteDto;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteMapper;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteMapperImpl;
-import ventaproducto.ventasproductos.repository.ClienteRepository;
-import ventaproducto.ventasproductos.servicies.Cliente.ClienteService;
 import ventaproducto.ventasproductos.entities.Cliente;
 import static org.mockito.BDDMockito.given;
+import ventaproducto.ventasproductos.repository.ClienteRepository;
+import ventaproducto.ventasproductos.servicies.Cliente.ClienteService;
 
 
 
-@ExtendWith(MockitoExtension.class)
- public class ClienteServiceTest {
+@RunWith(MockitoJUnitRunner.class)
+public class ClienteServiceTest{
     
     @Mock
     private ClienteRepository clienteRepository;
 
     @InjectMocks
     private ClienteService clienteService;
-    Cliente customer; 
+
+
+    Cliente customer = new Cliente();
     ClienteMapper clienteMapper;
 
     @BeforeEach
@@ -38,39 +40,26 @@ import static org.mockito.BDDMockito.given;
         
         clienteMapper = new ClienteMapperImpl();
         clienteService = new ClienteService(clienteRepository);
-        customer = new Cliente();
-        /*customer = Cliente.builder()
+        customer = Cliente.builder()
         .id(1L)
         .nombre("juan")
         .email("tumama@gmail.com")
         .direccion("la de tu mama")
         .pedidos(null)
-        .build();*/
-
-        customer.setId(1L);
-        customer.setNombre("juan");
-        customer.setEmail("tumama@gmail.com");
-        customer.setDireccion("la de tu mama");
-        customer.setPedidos(null);
+        .build();
         
         clienteRepository.save(customer);
     }
 
     @Test
     public void testGuardarCliente() {
-        /*customer = Cliente.builder()
+        customer = Cliente.builder()
         .id(1L)
         .nombre("juan")
         .email("tumama@gmail.com")
         .direccion("la de tu mama")
         .pedidos(null)
-        .build();*/
-
-        customer.setId(1l);
-        customer.setNombre("juan");
-        customer.setEmail("tumama@gmail.com");
-        customer.setDireccion("la de tu mama");
-        customer.setPedidos(null);
+        .build();
 
         given(clienteRepository.save(any())).willReturn(customer);
         
