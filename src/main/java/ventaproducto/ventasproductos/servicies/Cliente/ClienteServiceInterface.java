@@ -1,7 +1,5 @@
 package ventaproducto.ventasproductos.servicies.Cliente;
 
-import java.util.List;
-
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDto;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 

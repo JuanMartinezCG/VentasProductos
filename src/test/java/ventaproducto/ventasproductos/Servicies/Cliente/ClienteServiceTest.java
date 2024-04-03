@@ -9,32 +9,39 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
+import ventaproducto.ventasproductos.AbstractIntegrationDBTest;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDto;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteMapper;
+import ventaproducto.ventasproductos.dto.Cliente.ClienteMapperImpl;
 import ventaproducto.ventasproductos.entities.Cliente;
 import static org.mockito.BDDMockito.given;
 import ventaproducto.ventasproductos.repository.ClienteRepository;
 import ventaproducto.ventasproductos.servicies.Cliente.ClienteService;
 
-@ExtendWith(MockitoExtension.class)
-class ClienteServiceTest {
+
+public class ClienteServiceTest extends AbstractIntegrationDBTest{
     
-    @Mock
     private ClienteRepository clienteRepository;
-
-    @InjectMocks
     private ClienteService clienteService;
+    private Cliente customer;
+    private ClienteMapper clienteMapper;
 
-    Cliente customer;
-
-    ClienteMapper clienteMapper;
+    public ClienteServiceTest(ClienteRepository clienteRepository, Cliente customer,
+            ClienteMapper clienteMapper) {
+        this.clienteRepository = clienteRepository;
+        this.clienteService = new ClienteService(this.clienteRepository);
+        this.customer = customer;
+        this.clienteMapper = clienteMapper;
+    }
 
     @BeforeEach
     void setUp() {
-        /*cliente = Cliente.builder()
+        /*customer = Cliente.builder()
         .id(1L)
         .nombre("juan")
         .email("tumama@gmail.com")
@@ -42,9 +49,6 @@ class ClienteServiceTest {
         .pedidos(null)
         .build();*/
 
-        clienteMapper = new ClienteMapper();
-        clienteService=new ClienteService(clienteRepository);
-        customer = new Cliente();
         customer.setId(1L);
         customer.setNombre("juan");
         customer.setEmail("tumama@gmail.com");
@@ -55,8 +59,8 @@ class ClienteServiceTest {
     }
 
     @Test
-    void testGuardarCliente() {
-        /*cliente = Cliente.builder()
+    public void testGuardarCliente() {
+        /*customer = Cliente.builder()
         .id(1L)
         .nombre("juan")
         .email("tumama@gmail.com")

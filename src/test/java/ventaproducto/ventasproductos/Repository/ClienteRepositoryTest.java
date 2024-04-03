@@ -30,20 +30,20 @@ class ClienteRepositoryTest extends AbstractIntegrationDBTest{
 
     @Test
     void RetornarCliente(){
-        /*cliente = Cliente.builder()
+        customer = Cliente.builder()
         .id(1L)
         .nombre("juan")
         .email("tumama@gmail.com")
         .direccion("la de tu mama")
         .pedidos(null)
-        .build();*/
-
+        .build();
+        /* 
         customer = new Cliente();
         customer.setId(1L);
         customer.setNombre("juan");
         customer.setEmail("tumama@gmail.com");
         customer.setDireccion("la de tu mama");
-        customer.setPedidos(null);
+        customer.setPedidos(null);*/
 
         Cliente clienteGuardado = clienteRepository.save(customer);
 
