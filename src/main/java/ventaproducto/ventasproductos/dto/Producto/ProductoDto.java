@@ -5,11 +5,14 @@ import java.util.List;
 
 import ventaproducto.ventasproductos.dto.ItemPedido.ItemPedidoDto;
 
-public record ProductoDtoSave (
-        Long id,
-        String nombre,
-        BigDecimal price,
-        int stock,
-        List<ItemPedidoDto> itemPedidoDto){
+
+
+public record ProductoDto(
+            Long id,
+            String nombre,
+            BigDecimal price,
+            int stock,
+            List<ItemPedidoDto> itemPedidoDto){
+
     
 }

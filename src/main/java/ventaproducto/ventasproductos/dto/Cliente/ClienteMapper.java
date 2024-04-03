@@ -2,7 +2,6 @@ package ventaproducto.ventasproductos.dto.Cliente;
 
 
 import org.mapstruct.Mapper;
-
 import org.mapstruct.factory.Mappers;
 
 import ventaproducto.ventasproductos.entities.Cliente;

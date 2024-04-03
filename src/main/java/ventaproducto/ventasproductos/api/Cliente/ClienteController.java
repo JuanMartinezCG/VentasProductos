@@ -1,6 +1,5 @@
 package ventaproducto.ventasproductos.api.Cliente;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
@@ -24,6 +23,8 @@ public class ClienteController {
         clienteService.guardarCliente(clienteJSON);
         return ResponseEntity.ok(200);
     }
+
+    
     /* 
     // Obtener cliente por ID
     @GetMapping("/{id}")

@@ -1,7 +1,8 @@
 package ventaproducto.ventasproductos.repository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,8 +13,9 @@ import ventaproducto.ventasproductos.entities.Pago;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago,Long>{
     // buscar un pago entre las fechas seleccionadas
-    List<Pago> findByFechaPagoBetween(Date FechaInicio, Date FechaFin);
+    Optional<List<Pago>> findByFechaPagoBetween(LocalDateTime fechaInicio,LocalDateTime fechaFinal);
 
     // buscar un pago por medio de su IdPEdido y su metodo
-    List<Pago> findByPedidoIdAndMetodoPago(Long pedidoId, MetodoPago metodoPago);
+    Optional<Pago> findByIdAndMetodoDePago(Long pagoId, MetodoPago metodoDePago);    
+    
 }

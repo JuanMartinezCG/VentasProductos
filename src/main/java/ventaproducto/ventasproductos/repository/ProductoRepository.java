@@ -1,9 +1,10 @@
 package ventaproducto.ventasproductos.repository;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import ventaproducto.ventasproductos.entities.Producto;
@@ -11,9 +12,15 @@ import ventaproducto.ventasproductos.entities.Producto;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Long>{
     // buscar producto 
-    List<Producto> findByNombre(String nombre);
+    Optional<List<Producto>> findByNombreContainingIgnoreCase(String termino);
     //buscar por Stock
-    List<Producto> findByStockGreaterThan(int stock);
+    @Query("SELECT p FROM Producto p WHERE p.stock >= :num")
+    Optional<List<Producto>> findByProductStockEqual(Integer num);
     //buscar por un precio y un stock
-    List<Producto> findByPriceLessThanEqualAndStockLessThanEqual(BigDecimal price, int stock);
+    @Query("SELECT p FROM Producto p WHERE p.price <= :price AND p.stock <= :stock")
+    Optional<List<Producto>> findByPrecioAndStock(Integer price, Integer stock);
+
+    
+    
+    
 }

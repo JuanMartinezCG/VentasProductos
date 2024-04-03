@@ -1,23 +1,27 @@
 package ventaproducto.ventasproductos.servicies.Cliente;
 
+import java.util.List;
+import java.util.Optional;
+
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDto;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 
 public interface ClienteServiceInterface {
 
     ClienteDto guardarCliente(ClienteDtoSave cliente);
-    /*
-    List<ClienteDto> encontrarTodosClientes();
     
-    ClienteDto obtenerClientePorId(Long id);
+    ClienteDto actualizarCliente(ClienteDtoSave clienteDto);
     
-    ClienteDto actualizarCliente(Long id, ClienteDtoSave clienteDto);
+    Optional<List<ClienteDto>> getAllClientes();
+
+    ClienteDto findById(Long id);
     
     void eliminarCliente(Long id);
+
+    Optional<ClienteDto> findByEmail(String email);
     
-    List<ClienteDto> encontrarClientesPorEmail(String email);
+    Optional<List<ClienteDto>> findByDireccion(String direccion);
     
-    List<ClienteDto> encontrarClientesPorDireccion(String direccion);
+    Optional<List<ClienteDto>> findByNombreStartingWith(String nombre);
     
-    List<ClienteDto> encontrarClientesPorNombre(String nombre);*/
 }

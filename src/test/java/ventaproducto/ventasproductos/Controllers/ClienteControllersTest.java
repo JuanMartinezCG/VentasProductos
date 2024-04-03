@@ -6,11 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -24,8 +22,6 @@ import ventaproducto.ventasproductos.dto.Cliente.ClienteDto;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteMapper;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteMapperImpl;
-import ventaproducto.ventasproductos.repository.ClienteRepository;
-import ventaproducto.ventasproductos.servicies.Cliente.ClienteService;
 import ventaproducto.ventasproductos.servicies.Cliente.ClienteServiceInterface;
 
 import static org.mockito.Mockito.when;

@@ -6,6 +6,10 @@ import ventaproducto.ventasproductos.dto.Cliente.ClienteMapper;
 import ventaproducto.ventasproductos.entities.Cliente;
 import ventaproducto.ventasproductos.repository.ClienteRepository;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,66 +28,69 @@ public class ClienteService implements ClienteServiceInterface {
 
     @Override
     public ClienteDto guardarCliente(ClienteDtoSave clienteJSON) {
-        Cliente client = ClienteMapper.INSTANCE.Formato(clienteJSON);
-        Cliente clienteGuardado = clienteRepository.save(client);
+        Cliente cliente = ClienteMapper.INSTANCE.Formato(clienteJSON);
+        Cliente clienteGuardado = clienteRepository.save(cliente);
         return ClienteMapper.INSTANCE.clienteToClienteDto(clienteGuardado);
     }
-/*
+    
     @Override
-    public List<ClienteDto> encontrarTodosClientes() {
+    public ClienteDto actualizarCliente(ClienteDtoSave clienteJSON) {
+
+        Cliente clienteActual = ClienteMapper.INSTANCE.Formato(clienteJSON);
+
+        Cliente clienteExistente = clienteRepository.findById(clienteJSON.id())
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + clienteJSON.id()));
+
+        clienteExistente.setNombre(clienteActual.getNombre());
+        clienteExistente.setDireccion(clienteActual.getDireccion());
+        clienteExistente.setEmail(clienteActual.getEmail());
+        clienteExistente.setPedidos(clienteActual.getPedidos());
+    
+        clienteExistente = clienteRepository.save(clienteExistente);
+        return ClienteMapper.INSTANCE.clienteToClienteDto(clienteExistente);
+    }
+
+    public Optional<List<ClienteDto>> getAllClientes(){
         List<Cliente> clientes = clienteRepository.findAll();
-        return clientes.stream()
-                .map(clienteMapper::clienteToClienteDto)
-                .collect(Collectors.toList());
+        List<ClienteDto> clientesDtos = clientes.stream().map(ClienteMapper.INSTANCE:: clienteToClienteDto).collect(Collectors.toList());
+        return Optional.of(clientesDtos);
     }
 
-    @Override
-    public ClienteDto obtenerClientePorId(Long id) {
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
-        return clienteMapper.clienteToClienteDto(cliente);
-    }
-     
-    @Override
-    public ClienteDto actualizarCliente(Long id, ClienteDtoSave clienteDto) {
+    public ClienteDto findById(Long id){
         Cliente clienteExistente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
+            .orElseThrow(() -> new RuntimeException("||| Cliente no encontrado con ID: " + id));
+        return ClienteMapper.INSTANCE.clienteToClienteDto(clienteExistente);    
+    }
 
-        Cliente clienteActualizado = clienteMapper.clienteDtoToCliente(clienteDto);
-        clienteActualizado.setId(id);
+    public void eliminarCliente(Long id){
+        Cliente clienteExistente = clienteRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException(" ||| Cliente no encontrado con ID: " + id));
 
-        Cliente clienteGuardado = clienteRepository.save(clienteActualizado);
-        return clienteMapper.clienteToClienteDto(clienteGuardado);
+        clienteRepository.delete(clienteExistente);
+    }
+
+    public Optional<ClienteDto> findByEmail(String email){
+        Cliente clienteExistente = clienteRepository.findByEmail(email)
+        .orElseThrow(()-> new RuntimeException("||| Cliente no encontrado con email: " + email));
+        return Optional.ofNullable(ClienteMapper.INSTANCE.clienteToClienteDto(clienteExistente));
     }
 
     @Override
-    public void eliminarCliente(Long id) {
-        clienteRepository.deleteById(id);
-    }
+    public Optional<List<ClienteDto>> findByDireccion(String direccion){
 
-    //---------------------------------------------------------------------------
-
-    @Override
-    public List<ClienteDto> encontrarClientesPorEmail(String email) {
-        List<Cliente> clientes = clienteRepository.findByEmail(email);
-        return clientes.stream()
-                .map(clienteMapper::clienteToClienteDto)
-                .collect(Collectors.toList());
+        List<Cliente> clienteExistente = clienteRepository.findByDireccion(direccion)
+        .orElseThrow(()->new RuntimeException("||| cliente no Existe"+ direccion));
+        List<ClienteDto> clientesDto = clienteExistente.stream().map(ClienteMapper.INSTANCE::clienteToClienteDto).collect(Collectors.toList());
+        return Optional.of(clientesDto);
     }
 
     @Override
-    public List<ClienteDto> encontrarClientesPorDireccion(String direccion) {
-        List<Cliente> clientes = clienteRepository.findByDireccion(direccion);
-        return clientes.stream()
-                .map(clienteMapper::clienteToClienteDto)
-                .collect(Collectors.toList());
+    public Optional<List<ClienteDto>> findByNombreStartingWith(String nombre){
+
+        List<Cliente> clienteExistente = clienteRepository.findByDireccion(nombre)
+        .orElseThrow(()->new RuntimeException("||| Cliente no Existe"+ nombre));
+        List<ClienteDto> clientesDto = clienteExistente.stream().map(ClienteMapper.INSTANCE::clienteToClienteDto).collect(Collectors.toList());
+        return Optional.of(clientesDto);
     }
 
-    @Override
-    public List<ClienteDto> encontrarClientesPorNombre(String nombre) {
-        List<Cliente> clientes = clienteRepository.findByNombre(nombre);
-        return clientes.stream()
-                .map(clienteMapper::clienteToClienteDto)
-                .collect(Collectors.toList());
-    }*/
 }
