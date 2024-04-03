@@ -6,10 +6,13 @@ import static org.mockito.ArgumentMatchers.any;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,27 +20,23 @@ import ventaproducto.ventasproductos.AbstractIntegrationDBTest;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDto;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteDtoSave;
 import ventaproducto.ventasproductos.dto.Cliente.ClienteMapper;
-import ventaproducto.ventasproductos.dto.Cliente.ClienteMapperImpl;
 import ventaproducto.ventasproductos.entities.Cliente;
 import static org.mockito.BDDMockito.given;
 import ventaproducto.ventasproductos.repository.ClienteRepository;
 import ventaproducto.ventasproductos.servicies.Cliente.ClienteService;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class ClienteServiceTest extends AbstractIntegrationDBTest{
     
+    @Mock
     private ClienteRepository clienteRepository;
-    private ClienteService clienteService;
-    private Cliente customer;
-    private ClienteMapper clienteMapper;
 
-    public ClienteServiceTest(ClienteRepository clienteRepository, Cliente customer,
-            ClienteMapper clienteMapper) {
-        this.clienteRepository = clienteRepository;
-        this.clienteService = new ClienteService(this.clienteRepository);
-        this.customer = customer;
-        this.clienteMapper = clienteMapper;
-    }
+    @InjectMocks
+    private ClienteService clienteService;
+
+
+    Cliente customer = new Cliente();
+    ClienteMapper clienteMapper;
 
     @BeforeEach
     void setUp() {
@@ -48,7 +47,8 @@ public class ClienteServiceTest extends AbstractIntegrationDBTest{
         .direccion("la de tu mama")
         .pedidos(null)
         .build();*/
-
+        clienteMapper = new ClienteMapperImpl();
+        clienteService = new ClienteService(clienteRepository);
         customer.setId(1L);
         customer.setNombre("juan");
         customer.setEmail("tumama@gmail.com");
