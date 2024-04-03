@@ -25,7 +25,7 @@ public class ClienteControllersTest {
     @Test
     public void guardarClienteTest() throws Exception {
         // Crear un objeto ClienteDtoSave simulado para enviar en la solicitud
-        ClienteDtoSave clienteDtoSave = new ClienteDtoSave("Nombre", "correo@example.com", "Dirección");
+        ClienteDtoSave clienteDtoSave = new ClienteDtoSave(1L,"Nombre", "correo@example.com", "Dirección");
 
         // Convertir el objeto ClienteDtoSave a formato JSON
         String clienteDtoSaveJson = objectMapper.writeValueAsString(clienteDtoSave);
