@@ -52,7 +52,8 @@ public class ClienteService implements ClienteServiceInterface {
 
     public Optional<List<ClienteDto>> getAllClientes(){
         List<Cliente> clientes = clienteRepository.findAll();
-        List<ClienteDto> clientesDtos = clientes.stream().map(ClienteMapper.INSTANCE:: clienteToClienteDto).collect(Collectors.toList());
+        List<ClienteDto> clientesDtos = clientes.stream()
+        .map(ClienteMapper.INSTANCE:: clienteToClienteDto).collect(Collectors.toList());
         return Optional.of(clientesDtos);
     }
 
@@ -86,7 +87,7 @@ public class ClienteService implements ClienteServiceInterface {
 
     @Override
     public Optional<List<ClienteDto>> findByNombreStartingWith(String nombre){
-        List<Cliente> clienteExistente = clienteRepository.findByDireccion(nombre)
+        List<Cliente> clienteExistente = clienteRepository.findByNombreStartingWith(nombre)
         .orElseThrow(()->new RuntimeException("||| Cliente no Existe"+ nombre));
         List<ClienteDto> clientesDto = clienteExistente.stream().map(ClienteMapper.INSTANCE::clienteToClienteDto).collect(Collectors.toList());
         return Optional.of(clientesDto);

@@ -9,6 +9,6 @@ public record PedidoDtoSave(
         long id,
         ClienteDto cliente,
         LocalDateTime fechaPedido,
-        StatusPedido statusPedido) {
+        StatusPedido estatusPedido) {
     
 }

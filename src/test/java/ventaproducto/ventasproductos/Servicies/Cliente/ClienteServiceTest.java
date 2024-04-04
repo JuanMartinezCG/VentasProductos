@@ -131,8 +131,8 @@ public class ClienteServiceTest{
     @Test
     public void BuscarporNombre (){
         String NombreCliente="juan";
-        given(clienteRepository.findByDireccion(NombreCliente)).willReturn(Optional.of(List.of(customer)));
-        Optional<List<ClienteDto>> clienteDtos = clienteService.findByDireccion(NombreCliente);
+        given(clienteRepository.findByNombreStartingWith(NombreCliente)).willReturn(Optional.of(List.of(customer)));
+        Optional<List<ClienteDto>> clienteDtos = clienteService.findByNombreStartingWith(NombreCliente);
         assertThat(clienteDtos).isNotNull();
     }
 }
