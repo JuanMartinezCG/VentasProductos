@@ -12,9 +12,9 @@ import ventaproducto.ventasproductos.dto.Pago.PagoDto;
 
 public record PedidoDto (
             long id,
-            ClienteDto cliente,
             LocalDateTime fechaPedido,
             StatusPedido estatusPedido,
+            ClienteDto cliente,
             List<ItemPedidoDto> itemPedidoDtos,
             DetalleEnvioDto detalleEnvioDto,
             PagoDto pagoDto){
