@@ -1,6 +1,5 @@
 package ventaproducto.ventasproductos.repository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,5 +18,5 @@ public interface ProductoRepository extends JpaRepository<Producto,Long>{
     Optional<List<Producto>> findByProductStockEqual(Integer stock);
     //buscar por un precio y un stock
     @Query("SELECT p FROM Producto p WHERE p.price <= :price AND p.stock <= :stock")
-    Optional<List<Producto>> findBypriceAndStock(BigDecimal price, Integer stock);
+    Optional<List<Producto>> findBypriceAndStock(int price, Integer stock);
 }

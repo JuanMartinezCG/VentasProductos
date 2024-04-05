@@ -65,7 +65,7 @@ public class DetalleEnvioService implements DetalleEnvioInterface {
     }
 
     @Override
-    public void EliminarPEdido(Long id) {
+    public void EliminarDetalleEnvio(Long id) {
         DetalleEnvio detalleEnvio=detalleEnvioRep.findById(id)
         .orElseThrow(() -> new RuntimeException(" ||| DetalleEnvio no encontrado con ID: ||| "));
         detalleEnvioRep.delete(detalleEnvio);

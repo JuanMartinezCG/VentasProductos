@@ -16,7 +16,7 @@ public interface DetalleEnvioInterface {
 
     DetalleEnvioDto findById(Long id);
 
-    void EliminarPEdido(Long id);
+    void EliminarDetalleEnvio(Long id);
 
     Optional<DetalleEnvioDto> findByPedidoId(Long pedidoId);
 

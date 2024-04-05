@@ -16,7 +16,7 @@ public interface ItemPedidoInterface {
 
     ItemPedidoDto findById(Long id);
 
-    void deleteById(Long id);
+    void EliminarItemPedido(Long id);
 
     Optional<List<ItemPedidoDto>> findByPedidoId(Long pedidoId);
 

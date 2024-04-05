@@ -57,7 +57,7 @@ public class ItemPedidoServices implements ItemPedidoInterface{
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void EliminarItemPedido(Long id) {
         ItemPedido itemPedido=itemPedidoRepository.findById(id)
         .orElseThrow(() -> new RuntimeException(" ||| ItemPedido no encontrado con ID: ||| "));
         itemPedidoRepository.delete(itemPedido);

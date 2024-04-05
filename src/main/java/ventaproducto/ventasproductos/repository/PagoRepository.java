@@ -1,6 +1,6 @@
 package ventaproducto.ventasproductos.repository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ import ventaproducto.ventasproductos.entities.Pago;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago,Long>{
     // buscar un pago entre las fechas seleccionadas
-    Optional<List<Pago>> findByFechaPagoBetween(Date FechaInicio, Date FechaFin);
+    Optional<List<Pago>> findByFechaPagoBetween(LocalDateTime FechaInicio, LocalDateTime FechaFin);
     // buscar un pago por medio de su IdPEdido y su metodo
     Optional<Pago> findByPedidoIdAndMetodoPago(Long pedidoId, MetodoPago metodoPago);
 }

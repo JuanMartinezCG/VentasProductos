@@ -1,6 +1,5 @@
 package ventaproducto.ventasproductos.entities;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -37,7 +36,7 @@ public class Pago {
     private Pedido pedido;
 
     @Column
-    private BigDecimal totalPago;
+    private float totalPago;
     
     @Column
     private LocalDateTime fechaPago;

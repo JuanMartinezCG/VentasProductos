@@ -1,6 +1,5 @@
 package ventaproducto.ventasproductos.entities;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -31,7 +30,7 @@ public class Producto {
     @Column
     private String nombre;
     @Column
-    private BigDecimal price;
+    private int price;
     @Column
     private int stock;
 
